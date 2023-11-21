@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=['*'],
 )
 
-@app.get("/")
+@app.get("/", tags=["root"])
 def hello() -> dict:
     return {"message": "Hello World"}
 
