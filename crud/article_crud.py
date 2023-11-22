@@ -3,6 +3,10 @@ from models.article import Article
 from schemas.article import ArticleCreate
 from datetime import datetime
 
+def get_article(db: Session, article_id: int):
+    db_article = db.query(Article).filter(Article.id == article_id).first()
+    return db_article
+
 def get_article_list(db: Session):
     article_list = db.query(Article).order_by(Article.create_date.desc()).all()
     return article_list

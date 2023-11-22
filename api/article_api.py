@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException, status
 from database import get_db
 from schemas.article import ArticleBase, ArticleCreate
-from crud.article_crud import get_article_list, create_article
+from crud.article_crud import get_article, get_article_list, create_article
 from typing import List
 from sqlalchemy.orm import Session
 
@@ -11,6 +11,13 @@ router = APIRouter(
 )
 
 tags = ["articles"]
+
+@router.get("/{article_id}", response_model=ArticleBase, tags=tags)
+def article(article_id: int, db: Session = Depends(get_db)):
+    _article = get_article(db, article_id)
+    if _article is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Article not found")
+    return _article
 
 @router.get("/", response_model=List[ArticleBase], tags=tags)
 def article_list(db: Session = Depends(get_db)):
