@@ -19,3 +19,8 @@ def create_article(db: Session, article_create: ArticleCreate):
     db.add(db_article)
     db.commit()
     return db_article.id
+
+def delete_article(db: Session, db_article: Article):
+    db.delete(db_article)
+    db.commit()
+    return db_article.id
