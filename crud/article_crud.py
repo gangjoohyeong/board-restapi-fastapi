@@ -8,7 +8,7 @@ def get_article(db: Session, article_id: int):
     return db_article
 
 def get_article_list(db: Session):
-    article_list = db.query(Article).order_by(Article.create_date.desc()).all()
+    article_list = db.query(Article).order_by(Article.id.desc()).all()
     return article_list
 
 def create_article(db: Session, article_create: ArticleCreate):
