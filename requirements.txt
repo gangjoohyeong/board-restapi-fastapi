@@ -4,3 +4,4 @@ uvicorn==0.24.0.post1
 alembic==1.12.1
 pymysql==1.1.0
 mysqlclient==2.2.0
+pyyaml==6.0.1
